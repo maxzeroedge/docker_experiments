@@ -1,0 +1,29 @@
+name: amp-stack
+services:
+# Doesn't work with php yet
+  httpdserver:
+    image: httpd:2.4.57-alpine
+    restart: always
+    ports:
+      - 80:80
+    volumes:
+      - G:\Work\Geovale\geovalehydro:/usr/local/apache2/htdocs/geovalehydro
+  mysqldb:
+    image: mysql:8.0.33-debian
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: abc123
+    ports:
+      - 3306:3306
+    volumes:
+      - C:\Users\palas\Documents\workspace\docker\httpd_mysql\mysqldb_data:/var/lib/mysql
+  phpmyadmin:
+    image: phpmyadmin:5.2.1-apache
+    environment:
+      PMA_HOST: mysqldb
+      PMA_USER: root
+      PMA_PASSWORD: abc123
+      PMA_PORT: 3306
+    ports:
+      - 8090:80
