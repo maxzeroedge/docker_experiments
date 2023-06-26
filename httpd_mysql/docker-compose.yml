@@ -7,7 +7,7 @@ services:
     ports:
       - 80:80
     volumes:
-      - G:\Work\Geovale\geovalehydro:/usr/local/apache2/htdocs/geovalehydro
+      - ${PHP_CODE}:/usr/local/apache2/htdocs/geovalehydro
   mysqldb:
     image: mysql:8.0.33-debian
     command: --default-authentication-plugin=mysql_native_password
@@ -17,7 +17,7 @@ services:
     ports:
       - 3306:3306
     volumes:
-      - C:\Users\palas\Documents\workspace\docker\httpd_mysql\mysqldb_data:/var/lib/mysql
+      - ./mysqldb_data:/var/lib/mysql
   phpmyadmin:
     image: phpmyadmin:5.2.1-apache
     environment:
